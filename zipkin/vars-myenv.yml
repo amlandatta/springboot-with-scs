@@ -1,0 +1,5 @@
+app_name: adzipkin
+instances: 1
+memory: 1G
+disk_quota: 1G
+domain: apps.myenv.com

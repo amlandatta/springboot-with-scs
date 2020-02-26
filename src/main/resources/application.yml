@@ -1,0 +1,51 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    endpoint:
+       health:
+         show-details: always
+  trace:
+    http:
+      enabled: true
+
+server:
+  compression:
+    enabled: true
+    excluded-user-agents:
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+
+spring:
+  application:
+    name: adperfsimulator
+  cloud:
+    services:
+      registrationMethod: direct
+      # direct - c2c networking
+      # route - default
+#    loadBalancer:
+#      ribbon:
+#        enabled: true
+
+feign:
+  client:
+    config:
+      default:
+        connectTimeout: 5000
+        readTimeout: 10000
+        loggerLevel: full
+  hystrix:
+    enabled: false
+
+#ribbon:
+#  ReadTimeout: 3000
+#  ConnectTimeout: 3000
+#  eureka:
+#    enabled: true
+
+#backend-app:
+#  ribbon:
+#    NIWSServerListClassName: com.netflix.loadbalancer.ConfigurationBasedServerList
+#    listOfServers: https://backend-app.domain

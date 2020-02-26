@@ -1,0 +1,13 @@
+---
+applications:
+- name: ((app_name))
+  instances: ((instances))
+  memory: ((memory))
+  disk_quota: ((disk_quota))
+  docker:
+    image: openzipkin/zipkin-slim
+  routes:
+   - route: ((app_name)).((domain))
+   - route: ((app_name)).apps.internal
+  env:
+    MEM_MAX_SPANS: 100000

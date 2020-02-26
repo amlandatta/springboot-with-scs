@@ -1,0 +1,25 @@
+---
+applications:
+- name: ((app_name))
+  instances: ((instances))
+  memory: ((memory))
+  disk_quota: ((disk_quota))
+  health-check-type: http
+  health-check-http-endpoint: /health
+  health-check-invocation-timeout: 5
+  buildpacks:
+  - ((buildpack-java))
+  path: ((app_path))
+  routes:
+   - route: ((app_name)).((domain))
+   - route: ((app_name)).apps.internal
+  services:
+   - name: zipkin  
+   - name: ad-registry-service
+  env:
+    backend-app-name: ((backend-app-name))
+    SPRING_ZIPKIN_BASE_URL: ${vcap.services.zipkin.credentials.url}
+    SPRING_ZIPKIN_SERVICE_NAME: ${vcap.application.organization_name}:${vcap.application.space_name}:${vcap.application.application_name}
+
+        #   "routes": '[ { "predicates": ["Path=/greeting/**"] }]'
+   #- ad-config-service
